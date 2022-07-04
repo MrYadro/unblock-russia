@@ -1,2 +1,3 @@
 d3u3hkafyj3iak.cloudfront.net
 www.strava.com
+https://labs.strava.com
