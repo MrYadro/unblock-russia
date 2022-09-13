@@ -2,3 +2,4 @@ www.strava.com
 d3u3hkafyj3iak.cloudfront.net
 labs.strava.com
 d1xvpfi2ymo5li.cloudfront.net
+radarrapi.servarr.com
