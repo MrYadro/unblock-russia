@@ -8,3 +8,7 @@ radarr.video
 api.themoviedb.org
 image.tmdb.org
 www.themoviedb.org
+lidarr.servarr.com
+radarr.servarr.com
+readarr.servarr.com
+prowlarr.servarr.com
