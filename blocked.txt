@@ -7,5 +7,4 @@ api.radarr.video
 radarr.video
 api.themoviedb.org
 image.tmdb.org
-themoviedb.org
-tmdb.org
+www.themoviedb.org
