@@ -1,13 +1,8 @@
 www.strava.com
-d3u3hkafyj3iak.cloudfront.net
 labs.strava.com
-d1xvpfi2ymo5li.cloudfront.net
 radarrapi.servarr.com
 api.radarr.video
 radarr.video
-api.themoviedb.org
-image.tmdb.org
-www.themoviedb.org
 lidarr.servarr.com
 radarr.servarr.com
 readarr.servarr.com
