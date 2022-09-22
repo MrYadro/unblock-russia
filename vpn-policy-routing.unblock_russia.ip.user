@@ -8,7 +8,7 @@ _ret=1
 if [ ! -s "$TARGET_FNAME_IP" ]; then
         uclient-fetch --no-check-certificate -qO "$TARGET_FNAME_IP"_domains "$TARGET_URL_IP"
 fi
-dig -f "$TARGET_FNAME_IP"_domains +short | grep '^[.0-9]*$' > "$TARGET_FNAME_IP"
+dig @9.9.9.9 -f "$TARGET_FNAME_IP"_domains +short | grep '^[.0-9]*$' > "$TARGET_FNAME_IP"
 if [ -s "$TARGET_FNAME_IP" ]; then
         awk -v ipset="$TARGET_IPSET" '{print "add " ipset " " $1}' "$TARGET_FNAME_IP" | ipset restore -! && _ret=0
 fi
