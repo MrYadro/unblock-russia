@@ -8,3 +8,4 @@ radarr.servarr.com
 readarr.servarr.com
 prowlarr.servarr.com
 notifiarr.com
+api.lidarr.audio
