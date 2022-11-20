@@ -11,3 +11,5 @@ notifiarr.com
 api.lidarr.audio
 indexers.prowlarr.com
 image.tmdb.org
+api.themoviedb.org
+api.tmdb.org
