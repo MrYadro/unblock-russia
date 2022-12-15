@@ -14,7 +14,7 @@ if [ ! -s "$TARGET_DL_FILE" ]; then
 	uclient-fetch --no-check-certificate -qO- "$TARGET_URL" 2>/dev/null > "$TARGET_DL_FILE"_domains
 fi
 
-dig -f "$TARGET_FNAME_IP"_domains +short | grep '^[.0-9]*$' > "$TARGET_FNAME_IP"
+dig -f "$TARGET_DL_FILE"_domains +short | grep '^[.0-9]*$' > "$TARGET_DL_FILE"
 
 if [ -s "$TARGET_DL_FILE" ]; then
 	if ipset -q list "$TARGET_IPSET" >/dev/null 2>&1; then
