@@ -10,7 +10,7 @@ TARGET_NFT_FILE="/var/pbr_tmp_antifilter_unblock_russia_ip_ranges.nft"
 [ -z "$nft" ] && nft="$(command -v nft)"
 _ret=1
 
-if [ ! -s "$TARGET_DL_FILE" ]; then
+if [ ! -s "$TARGET_DL_FILE"_domains ]; then
 	uclient-fetch --no-check-certificate -qO- "$TARGET_URL" 2>/dev/null > "$TARGET_DL_FILE"_domains
 fi
 
