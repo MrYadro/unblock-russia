@@ -28,9 +28,15 @@ fi
 
 dig -f "$TARGET_DL_FILE_DOMAINS"_domains +short | grep '^[.0-9]*$' > "$TARGET_DL_FILE_DOMAINS"
 
+rm -f "$TARGET_DL_FILE_DOMAINS"_domains
+
 cat "$TARGET_DL_FILE_IP" >> "$TARGET_DL_FILE"
 cat "$TARGET_DL_FILE_SUBNET" >> "$TARGET_DL_FILE"
 cat "$TARGET_DL_FILE_DOMAINS" >> "$TARGET_DL_FILE"
+
+rm -f "$TARGET_DL_FILE_IP"
+rm -f "$TARGET_DL_FILE_SUBNET"
+rm -f "$TARGET_DL_FILE_DOMAINS"
 
 if [ -s "$TARGET_DL_FILE" ]; then
 	if ipset -q list "$TARGET_IPSET" >/dev/null 2>&1; then
