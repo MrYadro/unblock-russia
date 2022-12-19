@@ -20,13 +20,11 @@ TARGET_NFT_FILE="/var/pbr_tmp_merged.nft"
 [ -z "$nft" ] && nft="$(command -v nft)"
 _ret=1
 
-if [ ! -s "$TARGET_DL_FILE" ]; then
-	uclient-fetch --no-check-certificate -qO- "$TARGET_URL_IP" 2>/dev/null > "$TARGET_DL_FILE_IP"
-	uclient-fetch --no-check-certificate -qO- "$TARGET_URL_SUBNET" 2>/dev/null > "$TARGET_DL_FILE_SUBNET"
-	uclient-fetch --no-check-certificate -qO- "$TARGET_URL_DOMAINS" 2>/dev/null > "$TARGET_DL_FILE_DOMAINS"_domains
-fi
+uclient-fetch --no-check-certificate -qO- "$TARGET_URL_IP" 2>/dev/null > "$TARGET_DL_FILE_IP"
+uclient-fetch --no-check-certificate -qO- "$TARGET_URL_SUBNET" 2>/dev/null > "$TARGET_DL_FILE_SUBNET"
+uclient-fetch --no-check-certificate -qO- "$TARGET_URL_DOMAINS" 2>/dev/null > "$TARGET_DL_FILE_DOMAINS"_domains
 
-dig -f "$TARGET_DL_FILE_DOMAINS"_domains a +short | grep '^[.0-9]*$' > "$TARGET_DL_FILE_DOMAINS"
+dig -f "$TARGET_DL_FILE_DOMAINS"_domains A +short | grep '^[.0-9]*$' > "$TARGET_DL_FILE_DOMAINS"
 
 rm -f "$TARGET_DL_FILE_DOMAINS"_domains
 
@@ -39,20 +37,20 @@ rm -f "$TARGET_DL_FILE_SUBNET"
 rm -f "$TARGET_DL_FILE_DOMAINS"
 
 if [ -s "$TARGET_DL_FILE" ]; then
-	if ipset -q list "$TARGET_IPSET" >/dev/null 2>&1; then
-		if awk -v ipset="$TARGET_IPSET" '{print "add " ipset " " $1}' "$TARGET_DL_FILE" | ipset restore -!; then
-			_ret=0
-		fi
-	elif [ -n "$nft" ] && [ -x "$nft" ] && "$nft" list set "$TARGET_TABLE" "$TARGET_SET" >/dev/null 2>&1; then
-		printf "add element %s %s { " "$TARGET_TABLE" "$TARGET_SET" > "$TARGET_NFT_FILE"
-		awk '{printf $1 ", "}' "$TARGET_DL_FILE" >> "$TARGET_NFT_FILE"
-		printf " } " >> "$TARGET_NFT_FILE"
-		if "$nft" -f "$TARGET_NFT_FILE"; then
-			rm -f "$TARGET_DL_FILE"
-			rm -f "$TARGET_NFT_FILE"
-			_ret=0
-		fi
-	fi
+        if ipset -q list "$TARGET_IPSET" >/dev/null 2>&1; then
+                if awk -v ipset="$TARGET_IPSET" '{print "add " ipset " " $1}' "$TARGET_DL_FILE" | ipset restore -!; then
+                        _ret=0
+                fi
+        elif [ -n "$nft" ] && [ -x "$nft" ] && "$nft" list set "$TARGET_TABLE" "$TARGET_SET" >/dev/null 2>&1; then
+                printf "add element %s %s { " "$TARGET_TABLE" "$TARGET_SET" > "$TARGET_NFT_FILE"
+                awk '{printf $1 ", "}' "$TARGET_DL_FILE" >> "$TARGET_NFT_FILE"
+                printf " } " >> "$TARGET_NFT_FILE"
+                if "$nft" -f "$TARGET_NFT_FILE"; then
+                        rm -f "$TARGET_DL_FILE"
+                        rm -f "$TARGET_NFT_FILE"
+                        _ret=0
+                fi
+        fi
 fi
 
 return $_ret
