@@ -26,7 +26,7 @@ if [ ! -s "$TARGET_DL_FILE" ]; then
 	uclient-fetch --no-check-certificate -qO- "$TARGET_URL_DOMAINS" 2>/dev/null > "$TARGET_DL_FILE_DOMAINS"_domains
 fi
 
-dig -f "$TARGET_DL_FILE_DOMAINS"_domains +short | grep '^[.0-9]*$' > "$TARGET_DL_FILE_DOMAINS"
+dig -f "$TARGET_DL_FILE_DOMAINS"_domains a +short @9.9.9.10 | grep '^[.0-9]*$' > "$TARGET_DL_FILE_DOMAINS"
 
 rm -f "$TARGET_DL_FILE_DOMAINS"_domains
 
