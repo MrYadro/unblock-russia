@@ -11,9 +11,6 @@ TARGET_DL_FILE_IP="/var/pbr_tmp_antifilter_ip_ip_ranges"
 TARGET_URL_SUBNET="https://antifilter.download/list/subnet.lst"
 TARGET_DL_FILE_SUBNET="/var/pbr_tmp_antifilter_subnet_ip_ranges"
 
-TARGET_URL_COMMUNITY_SUBNET="https://community.antifilter.download/list/community.lst"
-TARGET_DL_FILE_COMMUNITY_SUBNET="/var/pbr_tmp_antifilter_community_ranges"
-
 TARGET_URL_DOMAINS="https://raw.githubusercontent.com/MrYadro/unblock-russia/main/blocked.lst"
 TARGET_DL_FILE_DOMAINS="/var/pbr_tmp_unblock_russia_ip_ranges"
 
@@ -25,7 +22,6 @@ _ret=1
 
 uclient-fetch --no-check-certificate -qO- "$TARGET_URL_IP" 2>/dev/null > "$TARGET_DL_FILE_IP"
 uclient-fetch --no-check-certificate -qO- "$TARGET_URL_SUBNET" 2>/dev/null > "$TARGET_DL_FILE_SUBNET"
-uclient-fetch --no-check-certificate -qO- "$TARGET_URL_COMMUNITY_SUBNET" 2>/dev/null > "$TARGET_DL_FILE_COMMUNITY_SUBNET"
 uclient-fetch --no-check-certificate -qO- "$TARGET_URL_DOMAINS" 2>/dev/null > "$TARGET_DL_FILE_DOMAINS"_domains
 
 dig -f "$TARGET_DL_FILE_DOMAINS"_domains A +short | grep '^[.0-9]*$' > "$TARGET_DL_FILE_DOMAINS"
@@ -34,12 +30,10 @@ rm -f "$TARGET_DL_FILE_DOMAINS"_domains
 
 cat "$TARGET_DL_FILE_IP" >> "$TARGET_DL_FILE"
 cat "$TARGET_DL_FILE_SUBNET" >> "$TARGET_DL_FILE"
-cat "$TARGET_DL_FILE_COMMUNITY_SUBNET" >> "$TARGET_DL_FILE"
 cat "$TARGET_DL_FILE_DOMAINS" >> "$TARGET_DL_FILE"
 
 rm -f "$TARGET_DL_FILE_IP"
 rm -f "$TARGET_DL_FILE_SUBNET"
-rm -f "$TARGET_DL_FILE_COMMUNITY_SUBNET"
 rm -f "$TARGET_DL_FILE_DOMAINS"
 
 if [ -s "$TARGET_DL_FILE" ]; then
