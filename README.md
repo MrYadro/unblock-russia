@@ -6,5 +6,5 @@ Created with [OpenWrt](https://openwrt.org/), [wireguard](https://openwrt.org/do
 
 # How to
 
-1. Add `pbr.user.unblock_russia` to your `pbr` config
+1. Add `pbr.user.unblock_russia` to your `pbr` Custom User File Includes config
 1. That's it!
